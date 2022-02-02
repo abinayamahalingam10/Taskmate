@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    <title>Welcome to Taskmate!</title>
+ {% endblock title %}
+
+ {% block content %}
+   <div class = "container">
+      <div class = "row mt-5">
+          <div class="col-lg-4">
+              <img src = "{% static 'images/homep.jpg' %}" alt = "Notes" width = "360" height = "200">
+        </div>
+        <div class="col-lg-4">
+            <img src = "{% static 'images/homep1.jpg' %}" alt = "Notes" width = "360" height = "200">
+      </div>
+      <div class="col-lg-4">
+        <img src = "{% static 'images/homep.jpg' %}" alt = "Notes" width = "360" height = "200">
+     </div>
+    <div class =  "row mt-10" >
+        <center><h2>My own first ever Django Project! </h2></center>
+            <center> <h3>Quick and easy access! </h3></center>
+                <center><h3>Plan your tasks, get your lide organised </h3></center>
+                    <center><h3>TASKMATE! Lets keep our tasks in track </h3></center>
+     </div>
+    
+     <center><a href="{% url 'todolist' %}" button type="button" class="btn btn-primary btn-lg-mt-3" data-toggle="button" aria-pressed="false" autocomplete="off">
+        Let's Get Started!
+      </button></center></a>
+   </div>
+{% endblock content %}
