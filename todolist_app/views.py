@@ -12,13 +12,11 @@ def todolist(request):
     if request.method == "POST":
         form = TaskForm(request.POST or None)
         if form.is_valid():
-            instance = form.save(commit=False)
-            instance.manage = request.user
-            instance.save()
-        messages.success(request,("New Task Added!"))
+            form.save()
+            messages.success(request,("New Task Added!"))
         return redirect('todolist')
     else: 
-        all_tasks = TaskList.objects.filter(manage=request.user)
+        all_tasks = TaskList.objects.filter()
         paginator = Paginator(all_tasks, 10)
         page = request.GET.get('pg')
         all_tasks = paginator.get_page(page)
@@ -28,11 +26,7 @@ def todolist(request):
 @login_required
 def delete_task(request, task_id):
     task = TaskList.objects.get(pk=task_id)
-    if task.manage == request.user:
-        task.delete()
-    else:
-       messages.error(request,("Access Restricted, You Are Not Allowed."))
-
+    task.delete()
     return redirect('todolist')
 
 @login_required
@@ -52,12 +46,8 @@ def edit_task(request, task_id):
 @login_required
 def complete_task(request, task_id):
     task = TaskList.objects.get(pk=task_id)
-    if task.manage == request.user:
-        task.done = True
-        task.save()
-    else:
-       messages.error(request,("Access Restricted, You Are Not Allowed.")) 
-
+    task.save()
+    
     return redirect('todolist')
 
 @login_required
